@@ -1,0 +1,69 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly 
+?>
+
+
+    <div class="wrap">
+        <div id="poststuff">
+            <!--main heading-->
+            <h1>
+                <i class="fa fa-sliders options-page-header-icon" aria-hidden="true"></i> <?php echo __('WP Custom Admin Interface','wp_custom_admin_interface') ?><div style="display: inline-block; margin-left: 10px; margin-top: -2px; position: absolute;">
+                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                        <input type="hidden" name="cmd" value="_s-xclick">
+                        <input type="hidden" name="hosted_button_id" value="R38R9NBWSPX28">
+                        <input type="image" src="https://www.paypalobjects.com/en_AU/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online!">
+                        <img alt="" border="0" src="https://www.paypalobjects.com/en_AU/i/scr/pixel.gif" width="1" height="1">
+                    </form>
+                </div>
+            </h1>
+            
+            <!--notice message-->
+            <div data-dismissible="disable-done-notice-forever" class="notice notice-warning is-dismissible please-hide-that-annoying-notice">
+            <p><?php _e( '<h3>A Message from the Developer</h3><p>Hi there! Thanks for using my plugin. I wrote this plugin because at the moment I use a few different little plugins to customise the admin interface and I thought it would be great to put it all into one and make things easy to use. I appreciate that customising the WordPress admin is a bit of a pandora\'s box as everyone has their own way they like to do things. At the moment this plugin is pretty simple so I can\'t promise it will do everything you need to do, but I hope you  get something out of it. Please rate the plugin <a href="https://wordpress.org/support/plugin/wp-custom-admin-interface/reviews/?rate=5#new-post" target="_blank"><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></a>\'s.</p>
+            
+            <p>Sick of seeing this notice and my ugly face at the bottom of this settings page? <i style="color: #d14032; font-weight: 900;" class="fa fa-frown-o" aria-hidden="true"></i> Why not hide it using this plugin with the following <a class="open-tab" href="#customCodePage">CSS code</a>:</p>
+            <code><strong>.please-hide-that-annoying-notice {display:none}</strong></code>', 'wp_linkedin_autopublish' ); ?></p>
+            </div>
+            
+            <!--start form-->
+            <form id='custom_admin_interface_settings_form' action='options.php' method='post'>
+                <!--start tabs-->
+                <div id="tabs" class="nav-tab-wrapper"> 
+                    <ul class="tab-titles">
+                        <li><a class="nav-tab" href="#generalPage"><i class="fa fa-wrench" aria-hidden="true"></i> General Settings</a></li>
+                        <li><a class="nav-tab" href="#customCodePage"><i class="fa fa-code" aria-hidden="true"></i> Custom Admin Code</a></li>
+                        <li><a class="nav-tab" href="#maintenancePage"><i class="fa fa-pause-circle-o" aria-hidden="true"></i> Coming Soon/Maintenance Page</a></li>
+                        <li><a class="nav-tab" href="#widgetPage"><i class="fa fa-square-o" aria-hidden="true"></i> Custom Dashboard Widget</a></li>
+                        <li><a class="nav-tab" href="#importExportPage"><i class="fa fa-share-alt" aria-hidden="true"></i> Export/Import Settings</a></li>
+                        <li><a class="nav-tab" href="#menuPage"><i class="fa fa-bars" aria-hidden="true"></i> Customise Admin Menu</a></li>
+                        <li><a class="nav-tab" href="#helpPage"><i class="fa fa-question" aria-hidden="true"></i> Help</a></li>
+                    </ul>
+
+                    <!--add settings pages-->
+                    <?php 
+
+                    wp_custom_admin_interface_tab_content('generalPage'); 
+                    wp_custom_admin_interface_tab_content('customCodePage');
+                    wp_custom_admin_interface_tab_content('maintenancePage');
+                    wp_custom_admin_interface_tab_content('widgetPage');
+                    wp_custom_admin_interface_tab_content('importExportPage');
+                    wp_custom_admin_interface_tab_content('menuPage');
+                    wp_custom_admin_interface_tab_content('helpPage');
+
+
+                    ?>
+
+
+                </div> <!--end tabs div-->     
+            </form>     
+            <!--ad-->
+            <a id="plugin-ad" class="please-hide-that-annoying-notice" target="_blank" href="https://northernbeacheswebsites.com.au/contact/">
+                <div style="width: 100%; background-color: white; margin-bottom: 20px;">
+                    <div style="padding: 0px 25px; text-align: center;">
+                        <img style="vertical-align: middle; max-width: 100%; height: auto;" src="<?php echo plugins_url( '/images/development-ad.jpg', __FILE__ ); ?>">
+                    </div>
+                </div>
+            </a>
+
+        </div>
+    </div>

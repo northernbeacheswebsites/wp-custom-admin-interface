@@ -1,0 +1,1 @@
+jQuery(document).ready(function(a){var e=new Image;e.onload=function(){var e=this.height/(this.width/320);a("#login h1 a").css("height",e)};var i=a("#login h1 a").css("background-image");i=i.replace(/.*\s?url\([\'\"]?/,"").replace(/[\'\"]?\).*/,""),e.src=i});

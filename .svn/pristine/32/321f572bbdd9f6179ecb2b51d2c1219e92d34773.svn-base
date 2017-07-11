@@ -1,0 +1,145 @@
+=== WP Custom Admin Interface ===
+Contributors: northernbeacheswebsites
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=R38R9NBWSPX28
+Tags: admin, change admin, customize, hide, login, admin logo, admin login logo, change login logo, custom admin logo
+Requires at least: 3.0.1
+Tested up to: 4.7.4
+Stable tag: 2.6
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+
+With WP Custom Admin Interface you can easily customise the WordPress admin and login interfaces. 
+
+== Description ==
+
+With this plugin you can easily customise the WordPress admin and login interfaces, create a coming soon/maintenance page and create a dashboard widget. I designed this plugin because I was tired of using several small plugins to do the same thing. While these small plugins worked ok, having a lot of the common functions in one plugin is a lot easier and because you can export and import the plugin settings with ease it makes it easy to deploy customisations across several websites which is something I do all the time. 
+
+I don't proclaim this plugin to be an 'all-in-one' admin customiser solution unlike some other plugins. It just does what I consider to be the main things, but does it well. I do in the future plan on implementing a main admin menu customiser. At the moment you can:
+
+* Change the login screen background color
+* Change the login screen logo
+* Add a custom favicon to the backend and frontend of your website
+* Change the link and button colors
+* Customise the footer text which appears on every admin page and use the shortcode [year] to show the current year (for use in copyright text).
+* Remove the WordPress version number from the footer
+* Remove the admin toolbar from displaying on the frontend of WordPress
+* Add custom admin CSS
+* Add custom Javascript/jQuery
+* Add custom PHP to WordPress
+* Create a coming soon/maintenance page with custom content
+* Create a custom dashboard widget
+* You can set a future date to expire the maintenance mode
+* Export and import settings
+
+
+== Installation ==
+
+There are a couple of methods for installing and setting up this plugin.
+
+= Upload Manually =
+
+1. Download and unzip the plugin
+2. Upload the 'wp-custom-admin-interface' folder into the '/wp-content/plugins/' directory
+3. Go to the Plugins admin page and activate the plugin
+
+= Install via the Admin Area =
+
+1. In the admin area go to Plugins > Add New and search for "WP Custom Admin Interface"
+2. Click install and then click activate
+
+
+== Frequently Asked Questions ==
+
+Please use the support forum to raise any issues or questions. 
+
+== Screenshots ==
+
+1. General Settings
+2. Custom Admin CSS/Javascript Settings
+3. Maintenance Mode/Coming Soon Settings
+4. Maintenance Mode/Coming Soon Page
+5. Custom Dasboard Widget Settings
+6. Export/Import Settings
+
+
+== Changelog ==
+
+= 2.6 =
+* Added automatic HTML tags when using the editor in the plugin settings
+* Added the ability to change the favicon on the frontend and backend
+* Added the ability to change the link and button colours in the admin area
+
+= 2.5 =
+* Added custom PHP option
+
+= 2.4 =
+* Readme update
+
+= 2.3 =
+* Fixed support link
+
+= 2.2 =
+* Further enhancements to setting import security
+* Improved styling
+
+= 2.1 =
+* Fixed setting import security issue
+* Added new custom dashboard widget section
+* Added new shortcodes to use with text editor in the plugin
+
+= 2.0 =
+* Fixed export settings saving in settings
+* Added new maintenance mode management
+* Implemented settings tab memory feature
+
+= 1.2 =
+* Minor styling changes
+* Fixed donation link
+
+= 1.1 =
+* Minor styling changes
+* Made external styles and scripts load locally
+
+= 1.0 =
+* Initial launch of the plugin
+
+== Upgrade Notice ==
+
+= 2.6 =
+* Added automatic HTML tags when using the editor in the plugin settings
+* Added the ability to change the favicon on the frontend and backend
+* Added the ability to change the link and button colours in the admin area
+
+= 2.5 =
+* Added custom PHP option
+
+= 2.4 =
+* Readme update
+
+= 2.3 =
+* Fixed support link
+
+= 2.2 =
+* Further enhancements to setting import security
+* Improved styling
+
+= 2.1 =
+* Fixed setting import security issue
+* Added new custom dashboard widget section
+* Added new shortcodes to use with text editor in the plugin
+
+= 2.0 =
+* Fixed export settings saving in settings
+* Added new maintenance mode management
+* Implemented settings tab memory feature
+
+= 1.2 =
+* Minor styling changes
+* Fixed donation link
+
+= 1.1 =
+* Minor styling changes
+* Made external styles and scripts load locally
+
+= 1.0 =
+* This is the first version of the plugin.

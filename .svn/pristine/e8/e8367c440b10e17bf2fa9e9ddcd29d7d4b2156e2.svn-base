@@ -1,0 +1,225 @@
+=== WP Custom Admin Interface ===
+Contributors: northernbeacheswebsites
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=R38R9NBWSPX28
+Tags: admin, change admin, menu, menu editor, customize, hide, login, admin logo, admin login logo, change login logo, custom admin logo
+Requires at least: 3.0.1
+Tested up to: 4.7.4
+Stable tag: 3.3
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+
+With WP Custom Admin Interface you can easily customise the WordPress admin and login interfaces. 
+
+== Description ==
+
+With WP Custom Admin Interface you can easily customize the WordPress admin menu and customize the admin and login interfaces. You can also create a coming soon/maintenance page and create a custom dashboard widget. 
+
+WP Custom Admin Interface provides an awesome and simple interface to customize the backend of WordPress to provide a more customized experience for you and your clients or customers. WordPress administrators who manage multiple websites will appreciate the simple plugin settings export feature which will enable you to deploy customizations to multiple sites you manage.
+
+
+= Custom admin menu features =
+
+* Seamlessly re-arrange menu items with a drag and drop interface
+* Easily rename any menu item
+* Drag and drop top level menu items to sub level menu items and vice versa. Move any menu item anywhere!
+* Create new menu items and drag them to any position
+* Change the icon of any top level menu item from over 230 Dashicons or you can even upload your own icon!
+* Change more advanced properties like custom CSS classes, capability access and link target of any menu item
+* Add separators to space out top level menus
+* Restore a menu to the last save or to the standard WordPress menu
+* Using the simple condition builder easily apply the custom menu to select roles or users!
+
+
+= All the other great features =
+* Change the login screen background color
+* Change the login screen logo
+* Add a custom favicon to the backend and frontend of your website
+* Change the link and button colors
+* Customize the footer text which appears on every admin page and use a variety of nifty shortcodes like [year] to show the current year (for use in copyright text).
+* Remove the WordPress version number from the footer
+* Remove the admin toolbar from displaying on the frontend of WordPress
+* Add custom admin CSS
+* Add custom login CSS
+* Add custom Javascript/jQuery
+* Add custom PHP to WordPress
+* Create a coming soon/maintenance page with custom content and set a future expiry date to make your site live
+* Create a custom dashboard widget
+* Disable automatic updates
+* Export and import settings
+
+We hope you enjoy WP Custom Admin Interface! If you have any feature requests feel free to make a suggestion via the tab on the plugin settings page. For any support issues please use the WordPress support page.
+
+== Installation ==
+
+There are a couple of methods for installing and setting up this plugin.
+
+= Upload Manually =
+
+1. Download and unzip the plugin
+2. Upload the 'wp-custom-admin-interface' folder into the '/wp-content/plugins/' directory
+3. Go to the Plugins admin page and activate the plugin
+
+= Install via the Admin Area =
+
+1. In the admin area go to Plugins > Add New and search for "WP Custom Admin Interface"
+2. Click install and then click activate
+
+
+== Frequently Asked Questions ==
+
+= The custom admin menu has stuffed my site how can I get it back to normal =
+We don't foresee such an event occuring but if you do happen to run into this you can visit: yourwebsite.com/index.php?wp-custom-admin-interface=delete-menu (replacing yourwebsite.com with your website) and this will delete all the options associated with the custom admin menu. You need to make sure you are still logged in to an admin account for this to work. If you don't have admin access you'll need to either remove the database option or delete the plugin entirely. 
+
+= Is WP Custom Admin Interface completely free =
+Yes! And there's no pro version. Woohoo!
+
+= Need further help? =
+Please use the support forum to raise any issues or questions. 
+
+
+== Screenshots ==
+
+1. General Settings
+2. The menu builder in simple mode
+3. Upload a custom icon for menu items
+4. The menu builder in advanced mode
+5. The conditions to show or hide a menu to certain roles or users
+6. Custom admin CSS/Javascript settings
+7. Maintenance mode/coming soon settings
+8. Maintenance mode/coming soon page
+9. Custom dasboard widget settings
+10. Export/import settings
+
+
+== Changelog ==
+
+= 3.3 =
+* If you find yourself in some kind of emergency you can now delete the custom menu with a special URL - please see plugin FAQ for details
+* Fixed emergency URL when going to advanced mode
+
+
+= 3.2 =
+* Fixed performance issue
+
+= 3.1 =
+* Fixed restoration of default WordPress Menu functionality
+
+= 3.0 =
+* This version is the biggest release yet of the plugin. More work, time and effort have gone into this update than the whole plugin so far. With version 3.0 we are showcasing our new admin menu manager. We think this new admin menu manager raises the bar in terms of functionality and ease of use compared to other admin menu managers available. I could yabber on for hours about this new feature but perhaps checkout the main plugin information page and explore the new feature yourself
+
+= 2.8 =
+* Added the option to add custom login style
+* Added new custom admin color scheme designer
+* Tested with WordPress 4.7.5
+* Added ability to turn off automatic WordPress updates
+* Added new feature request section
+* Fixed import bug
+
+= 2.7 =
+* Moved custom CSS to the head so custom styles are implemented immidiately
+* Improved security of CSS output
+
+= 2.6 =
+* Added automatic HTML tags when using the editor in the plugin settings
+* Added the ability to change the favicon on the frontend and backend
+* Added the ability to change the link and button colours in the admin area
+
+= 2.5 =
+* Added custom PHP option
+
+= 2.4 =
+* Readme update
+
+= 2.3 =
+* Fixed support link
+
+= 2.2 =
+* Further enhancements to setting import security
+* Improved styling
+
+= 2.1 =
+* Fixed setting import security issue
+* Added new custom dashboard widget section
+* Added new shortcodes to use with text editor in the plugin
+
+= 2.0 =
+* Fixed export settings saving in settings
+* Added new maintenance mode management
+* Implemented settings tab memory feature
+
+= 1.2 =
+* Minor styling changes
+* Fixed donation link
+
+= 1.1 =
+* Minor styling changes
+* Made external styles and scripts load locally
+
+= 1.0 =
+* Initial launch of the plugin
+
+== Upgrade Notice ==
+
+= 3.3 =
+* If you find yourself in some kind of emergency you can now delete the custom menu with a special URL - please see plugin FAQ for details
+* Fixed emergency URL when going to advanced mode
+
+= 3.2 =
+* Fixed performance issue
+
+= 3.1 =
+* Fixed restoration of default WordPress Menu functionality
+
+= 3.0 =
+* This version is the biggest release yet of the plugin. More work, time and effort have gone into this update than the whole plugin so far. With version 3.0 we are showcasing our new admin menu manager. We think this new admin menu manager raises the bar in terms of functionality and ease of use compared to other admin menu managers available. I could yabber on for hours about this new feature but perhaps checkout the main plugin information page and explore the new feature yourself
+
+= 2.8 =
+* Added the option to add custom login style
+* Added new custom admin color scheme designer
+* Tested with WordPress 4.7.5
+* Added ability to turn off automatic WordPress updates
+* Added new feature request section
+* Fixed import bug
+
+= 2.7 =
+* Moved custom CSS to the head so custom styles are implemented immidiately
+* Improved security of CSS output
+
+= 2.6 =
+* Added automatic HTML tags when using the editor in the plugin settings
+* Added the ability to change the favicon on the frontend and backend
+* Added the ability to change the link and button colours in the admin area
+
+= 2.5 =
+* Added custom PHP option
+
+= 2.4 =
+* Readme update
+
+= 2.3 =
+* Fixed support link
+
+= 2.2 =
+* Further enhancements to setting import security
+* Improved styling
+
+= 2.1 =
+* Fixed setting import security issue
+* Added new custom dashboard widget section
+* Added new shortcodes to use with text editor in the plugin
+
+= 2.0 =
+* Fixed export settings saving in settings
+* Added new maintenance mode management
+* Implemented settings tab memory feature
+
+= 1.2 =
+* Minor styling changes
+* Fixed donation link
+
+= 1.1 =
+* Minor styling changes
+* Made external styles and scripts load locally
+
+= 1.0 =
+* This is the first version of the plugin.

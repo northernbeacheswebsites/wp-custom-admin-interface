@@ -1,0 +1,1191 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly 
+
+//define all the settings in the plugin
+function wp_custom_admin_interface_settings_init(  ) { 
+    
+    //start general
+	register_setting( 'generalPage', 'wp_custom_admin_interface_settings' );
+    
+    add_settings_section(
+		'wp_custom_admin_interface_general','', 
+		'wp_custom_admin_interface_settings_general_callback', 
+		'generalPage'
+	);
+
+	add_settings_field( 
+		'wp_custom_admin_interface_background_color','', 
+		'wp_custom_admin_interface_background_color_render', 
+		'generalPage', 
+		'wp_custom_admin_interface_general' 
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_custom_logo','', 
+		'wp_custom_admin_interface_custom_logo_render', 
+		'generalPage', 
+		'wp_custom_admin_interface_general' 
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_custom_favicon','', 
+		'wp_custom_admin_interface_custom_favicon_render', 
+		'generalPage', 
+		'wp_custom_admin_interface_general' 
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_custom_favicon_frontend','', 
+		'wp_custom_admin_interface_custom_favicon_frontend_render', 
+		'generalPage', 
+		'wp_custom_admin_interface_general' 
+	);
+    
+    
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_custom_footer','', 
+		'wp_custom_admin_interface_custom_footer_render', 
+		'generalPage', 
+		'wp_custom_admin_interface_general' 
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_remove_footer','', 
+		'wp_custom_admin_interface_remove_footer_render', 
+		'generalPage', 
+		'wp_custom_admin_interface_general' 
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_remove_toolbar_frontend','', 
+		'wp_custom_admin_interface_remove_toolbar_frontend_render', 
+		'generalPage', 
+		'wp_custom_admin_interface_general' 
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_disable_update','', 
+		'wp_custom_admin_interface_disable_update_render', 
+		'generalPage', 
+		'wp_custom_admin_interface_general' 
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_tab_memory','', 
+		'wp_custom_admin_interface_tab_memory_render', 
+		'generalPage', 
+		'wp_custom_admin_interface_general' 
+	);
+    
+    
+    //start custom css
+    register_setting( 'customCodePage', 'wp_custom_admin_interface_settings' );
+    
+    add_settings_section(
+		'wp_custom_admin_interface_custom_code','', 
+		'wp_custom_admin_interface_settings_custom_code_callback', 
+		'customCodePage'
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_custom_css_code','', 
+		'wp_custom_admin_interface_custom_css_code_render', 
+		'customCodePage', 
+		'wp_custom_admin_interface_custom_code' 
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_custom_login_css_code','', 
+		'wp_custom_admin_interface_custom_login_css_code_render', 
+		'customCodePage', 
+		'wp_custom_admin_interface_custom_code' 
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_custom_javascript_code','', 
+		'wp_custom_admin_interface_custom_javascript_code_render', 
+		'customCodePage', 
+		'wp_custom_admin_interface_custom_code' 
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_custom_php_code','', 
+		'wp_custom_admin_interface_custom_php_code_render', 
+		'customCodePage', 
+		'wp_custom_admin_interface_custom_code' 
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_deactivate_code','', 
+		'wp_custom_admin_interface_deactivate_code_render', 
+		'customCodePage', 
+		'wp_custom_admin_interface_custom_code' 
+	);
+    
+    
+    
+    //start maintenance
+    
+    register_setting( 'maintenancePage', 'wp_custom_admin_interface_settings' );
+    
+    add_settings_section(
+		'wp_custom_admin_interface_maintenance','', 
+		'wp_custom_admin_interface_maintenance_callback', 
+		'maintenancePage'
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_enable_maintenance','', 
+		'wp_custom_admin_interface_enable_maintenance_render', 
+		'maintenancePage', 
+		'wp_custom_admin_interface_maintenance' 
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_maintenance_text','', 
+		'wp_custom_admin_interface_maintenance_text_render', 
+		'maintenancePage', 
+		'wp_custom_admin_interface_maintenance' 
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_maintenance_end','', 
+		'wp_custom_admin_interface_maintenance_end_render', 
+		'maintenancePage', 
+		'wp_custom_admin_interface_maintenance' 
+	);
+    
+    //start widget page
+    
+    register_setting( 'widgetPage', 'wp_custom_admin_interface_settings' );
+    
+    add_settings_section(
+		'wp_custom_admin_interface_widget','', 
+		'wp_custom_admin_interface_widget_callback', 
+		'widgetPage'
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_enable_custom_widget','', 
+		'wp_custom_admin_interface_enable_custom_widget_render', 
+		'widgetPage', 
+		'wp_custom_admin_interface_widget' 
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_custom_widget_title','', 
+		'wp_custom_admin_interface_custom_widget_title_render', 
+		'widgetPage', 
+		'wp_custom_admin_interface_widget' 
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_custom_widget_content','', 
+		'wp_custom_admin_interface_custom_widget_content_render', 
+		'widgetPage', 
+		'wp_custom_admin_interface_widget' 
+	);
+    
+    
+    
+    //start custom color scheme
+    
+    register_setting( 'adminColorSchemePage', 'wp_custom_admin_interface_settings' );
+    
+    add_settings_section(
+		'wp_custom_admin_interface_admin_color_scheme','', 
+		'wp_custom_admin_interface_admin_color_scheme_callback', 
+		'adminColorSchemePage'
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_color_scheme_color_one','', 
+		'wp_custom_admin_interface_color_scheme_color_one_render', 
+		'adminColorSchemePage', 
+		'wp_custom_admin_interface_admin_color_scheme' 
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_color_scheme_color_two','', 
+		'wp_custom_admin_interface_color_scheme_color_two_render', 
+		'adminColorSchemePage', 
+		'wp_custom_admin_interface_admin_color_scheme' 
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_color_scheme_color_three','', 
+		'wp_custom_admin_interface_color_scheme_color_three_render', 
+		'adminColorSchemePage', 
+		'wp_custom_admin_interface_admin_color_scheme' 
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_color_scheme_color_four','', 
+		'wp_custom_admin_interface_color_scheme_color_four_render', 
+		'adminColorSchemePage', 
+		'wp_custom_admin_interface_admin_color_scheme' 
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_color_scheme_icon_color','', 
+		'wp_custom_admin_interface_color_scheme_icon_color_render', 
+		'adminColorSchemePage', 
+		'wp_custom_admin_interface_admin_color_scheme' 
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_force_color_scheme','', 
+		'wp_custom_admin_interface_force_color_scheme_render', 
+		'adminColorSchemePage', 
+		'wp_custom_admin_interface_admin_color_scheme' 
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_button_link_color','', 
+		'wp_custom_admin_interface_button_link_color_render', 
+		'adminColorSchemePage', 
+		'wp_custom_admin_interface_admin_color_scheme' 
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_button_link_hover_color','', 
+		'wp_custom_admin_interface_button_link_color_hover_render', 
+		'adminColorSchemePage', 
+		'wp_custom_admin_interface_admin_color_scheme' 
+	);
+    
+    
+    //start menu options
+    register_setting( 'menuPage', 'wp_custom_admin_interface_settings' );
+    
+    add_settings_section(
+		'wp_custom_admin_interface_admin_menu','', 
+		'wp_custom_admin_interface_admin_menu_callback', 
+		'menuPage'
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_top_level_menu','', 
+		'wp_custom_admin_interface_top_level_menu_render', 
+		'menuPage', 
+		'wp_custom_admin_interface_admin_menu' 
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_sub_level_menu','', 
+		'wp_custom_admin_interface_sub_level_menu_render', 
+		'menuPage', 
+		'wp_custom_admin_interface_admin_menu' 
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_remove_menu_item','', 
+		'wp_custom_admin_interface_remove_menu_item_render', 
+		'menuPage', 
+		'wp_custom_admin_interface_admin_menu' 
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_exception_type','', 
+		'wp_custom_admin_interface_exception_type_render', 
+		'menuPage', 
+		'wp_custom_admin_interface_admin_menu' 
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_exception_cases','', 
+		'wp_custom_admin_interface_exception_cases_render', 
+		'menuPage', 
+		'wp_custom_admin_interface_admin_menu' 
+	);
+    
+    
+    
+
+
+}
+
+
+//the following functions output the option html
+function wp_custom_admin_interface_background_color_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>
+    <tr valign="top">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_background_color">Login Screen Background Color</label>
+        </td>
+        <td>
+            
+            <input name="wp_custom_admin_interface_settings[wp_custom_admin_interface_background_color]" id="wp_custom_admin_interface_background_color" type="text" value="<?php if(isset($options['wp_custom_admin_interface_background_color'])) { echo esc_attr($options['wp_custom_admin_interface_background_color']); } ?>" class="my-color-field" data-default-color="#f1f1f1" />
+
+        </td>
+    </tr>
+	<?php
+}
+
+
+
+
+function wp_custom_admin_interface_custom_logo_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>
+    <tr valign="top">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_custom_logo">Custom Login Logo</label>
+        </td>
+        <td>
+            
+        <input class="wp_custom_admin_interface_settings_input" type="text" name="wp_custom_admin_interface_settings[wp_custom_admin_interface_custom_logo]" id="wp_custom_admin_interface_custom_logo" class="regular-text" value="<?php if(isset($options['wp_custom_admin_interface_custom_logo'])) { echo esc_attr($options['wp_custom_admin_interface_custom_logo']); } ?>">
+            
+            
+        <input type="button" name="upload-btn" id="upload-btn" class="button-secondary wp_custom_admin_interface_media_upload_button" value="Upload Image">
+
+        </td>
+    </tr>
+	<?php
+}
+
+
+function wp_custom_admin_interface_custom_favicon_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>
+    <tr valign="top">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_custom_favicon">Custom Favicon</label> <i class="fa fa-info-circle information-icon" aria-hidden="true"></i>
+            <p class="hidden"><em>For best results please upload an image with a square aspect ratio</em></p>
+        </td>
+        <td>
+            
+        <input class="wp_custom_admin_interface_settings_input" type="text" name="wp_custom_admin_interface_settings[wp_custom_admin_interface_custom_favicon]" id="wp_custom_admin_interface_custom_favicon" class="regular-text" value="<?php if(isset($options['wp_custom_admin_interface_custom_favicon'])) { echo esc_attr($options['wp_custom_admin_interface_custom_favicon']); } ?>">
+            
+            
+        <input type="button" name="upload-btn" id="upload-btn" class="button-secondary wp_custom_admin_interface_media_upload_button" value="Upload Image">
+
+        </td>
+    </tr>
+	<?php
+}
+
+
+function wp_custom_admin_interface_custom_favicon_frontend_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>
+    <tr valign="top">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_custom_favicon_frontend">Also add the above favicon to the frontend</label>
+        </td>
+        <td>
+            
+            <input class="wp_custom_admin_interface_settings_checkbox" type='checkbox' id="wp_custom_admin_interface_custom_favicon_frontend" name='wp_custom_admin_interface_settings[wp_custom_admin_interface_custom_favicon_frontend]' <?php checked( isset($options['wp_custom_admin_interface_custom_favicon_frontend']), 1 ); ?> value='1'>
+            
+        </td>
+    </tr>
+	<?php
+}
+
+
+
+function wp_custom_admin_interface_button_link_color_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>
+
+    <tr valign="top" style="border-top: 2px dashed #d6d4d4;">
+        <td scope="row">
+        </td>
+        <td>
+        </td>
+    </tr>
+
+    <tr valign="top">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_button_link_color">Admin Link &amp; Button Color</label> <i class="fa fa-info-circle information-icon" aria-hidden="true"></i>
+            <p class="hidden"><em>Please click the 'Default' button when changing the colour to load the default WordPress styling</em></p>
+        </td>
+        <td>
+            
+            <input name="wp_custom_admin_interface_settings[wp_custom_admin_interface_button_link_color]" id="wp_custom_admin_interface_button_link_color" type="text" value="<?php if(isset($options['wp_custom_admin_interface_button_link_color'])) { echo esc_attr($options['wp_custom_admin_interface_button_link_color']); } ?>" class="my-color-field" data-default-color="#0085ba" />
+
+        </td>
+    </tr>
+	<?php
+}
+
+
+function wp_custom_admin_interface_button_link_color_hover_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>
+    <tr valign="top">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_button_link_hover_color">Admin Link &amp; Button Hover Color</label> <i class="fa fa-info-circle information-icon" aria-hidden="true"></i>
+            <p class="hidden"><em>Please click the 'Default' button when changing the colour to load the default WordPress styling</em></p>
+        </td>
+        <td>
+            
+            <input name="wp_custom_admin_interface_settings[wp_custom_admin_interface_button_link_hover_color]" id="wp_custom_admin_interface_button_link_hover_color" type="text" value="<?php if(isset($options['wp_custom_admin_interface_button_link_hover_color'])) { echo esc_attr($options['wp_custom_admin_interface_button_link_hover_color']); } ?>" class="my-color-field" data-default-color="#008ec2" />
+
+        </td>
+    </tr>
+	<?php
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+function wp_custom_admin_interface_custom_footer_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>
+    <tr valign="top">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_custom_footer">Custom Footer Text</label> <i class="fa fa-info-circle information-icon" aria-hidden="true"></i>
+            <p class="hidden"><em>Please feel free to use shortcodes to add dynamic content.</em></p>
+
+            
+        </td>
+        <td>
+            
+            <?php 
+            
+            wp_custom_admin_interface_shortcode_output('footer_text');
+    
+            if(isset($options['wp_custom_admin_interface_custom_footer'])){    
+                wp_editor(html_entity_decode(stripslashes($options['wp_custom_admin_interface_custom_footer'])), "wp_custom_admin_interface_custom_footer", $settings = array(
+                'wpautop' => false,    
+                'textarea_name' => "wp_custom_admin_interface_settings[wp_custom_admin_interface_custom_footer]",
+                'drag_drop_upload' => true,
+                'textarea_rows' => 7, 
+                ));    
+            } else {
+                wp_editor("", "wp_custom_admin_interface_custom_footer", $settings = array(
+                'wpautop' => false,    
+                'textarea_name' => "wp_custom_admin_interface_settings[wp_custom_admin_interface_custom_footer]",
+                'drag_drop_upload' => true,
+                'textarea_rows' => 7,
+                ));         
+            }
+        
+            ?>
+
+        </td>
+    </tr>
+	<?php
+}
+
+
+
+function wp_custom_admin_interface_remove_toolbar_frontend_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>
+    <tr valign="top">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_remove_toolbar_frontend">Remove admin toolbar from the front end for all users</label>
+        </td>
+        <td>
+            
+            <input class="wp_custom_admin_interface_settings_checkbox" type='checkbox' id="wp_custom_admin_interface_remove_toolbar_frontend" name='wp_custom_admin_interface_settings[wp_custom_admin_interface_remove_toolbar_frontend]' <?php checked( isset($options['wp_custom_admin_interface_remove_toolbar_frontend']), 1 ); ?> value='1'>
+            
+        </td>
+    </tr>
+	<?php
+}
+
+
+
+function wp_custom_admin_interface_custom_css_code_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>
+    <tr valign="top">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_custom_css_code">Add custom CSS to the WordPress admin</label>
+        </td>
+        <td>
+            
+            
+            <textarea style="display:none;" cols="70" rows="30" name="wp_custom_admin_interface_settings[wp_custom_admin_interface_custom_css_code]" id="wp_custom_admin_interface_custom_css_code"><?php if(isset($options['wp_custom_admin_interface_custom_css_code'])) { echo esc_attr($options['wp_custom_admin_interface_custom_css_code']); } ?></textarea>
+            
+            
+        </td>
+    </tr>
+	<?php
+}
+
+
+
+
+
+function wp_custom_admin_interface_custom_login_css_code_render() { 
+	$options = get_option( 'wp_custom_admin_interface_custom_login_css_code' );
+	?>
+    <tr valign="top">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_custom_login_css_code">Add custom CSS to the WordPress login area</label>
+        </td>
+        <td>
+            
+            
+            <textarea style="display:none;" cols="70" rows="30" name="wp_custom_admin_interface_settings[wp_custom_admin_interface_custom_login_css_code]" id="wp_custom_admin_interface_custom_login_css_code"><?php if(isset($options['wp_custom_admin_interface_custom_login_css_code'])) { echo esc_attr($options['wp_custom_admin_interface_custom_login_css_code']); } ?></textarea>
+            
+            
+        </td>
+    </tr>
+	<?php
+}
+
+
+
+
+
+function wp_custom_admin_interface_custom_javascript_code_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>
+    <tr valign="top">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_custom_javascript_code">Add custom Javascript/jQuery to the WordPress admin</label> <i class="fa fa-info-circle information-icon" aria-hidden="true"></i>
+            <p class="hidden"><em>There's no need to put in the script tags and jQuery can be used like: <code><strong>$('body').show();</strong></code> </em></p>
+        </td>
+        <td>
+            
+            
+            <textarea style="display:none;" cols="70" rows="30" name="wp_custom_admin_interface_settings[wp_custom_admin_interface_custom_javascript_code]" id="wp_custom_admin_interface_custom_javascript_code"><?php if(isset($options['wp_custom_admin_interface_custom_javascript_code'])) { echo esc_attr($options['wp_custom_admin_interface_custom_javascript_code']); } ?></textarea>
+            
+            
+        </td>
+    </tr>
+	<?php
+}
+
+
+function wp_custom_admin_interface_custom_php_code_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>
+    <tr valign="top">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_custom_php_code">Add custom PHP to WordPress</label> <i class="fa fa-info-circle information-icon" aria-hidden="true"></i>
+            <p class="hidden"><em>There's no need to put in the starting or closing PHP tags</em></p>
+        </td>
+        <td>
+            <textarea style="display:none;" cols="70" rows="30" name="wp_custom_admin_interface_settings[wp_custom_admin_interface_custom_php_code]" id="wp_custom_admin_interface_custom_php_code"><?php if(isset($options['wp_custom_admin_interface_custom_php_code'])) { echo esc_attr($options['wp_custom_admin_interface_custom_php_code']); } ?></textarea>
+        </td>
+    </tr>
+	<?php
+}
+
+
+function wp_custom_admin_interface_remove_footer_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>
+    <tr valign="top">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_remove_footer">Remove WordPress Version Number from Footer</label>
+        </td>
+        <td>
+            
+            <input class="wp_custom_admin_interface_settings_checkbox" type='checkbox' id="wp_custom_admin_interface_remove_footer" name='wp_custom_admin_interface_settings[wp_custom_admin_interface_remove_footer]' <?php checked( isset($options['wp_custom_admin_interface_remove_footer']), 1 ); ?> value='1'>
+            
+        </td>
+    </tr>
+	<?php
+}
+
+
+
+function wp_custom_admin_interface_deactivate_code_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>
+    <tr valign="top">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_deactivate_code">Deactivate Custom Code on this Settings Tab</label>
+        </td>
+        <td>
+            
+            <input class="wp_custom_admin_interface_settings_checkbox" type='checkbox' id="wp_custom_admin_interface_deactivate_code" name='wp_custom_admin_interface_settings[wp_custom_admin_interface_deactivate_code]' <?php checked( isset($options['wp_custom_admin_interface_deactivate_code']), 1 ); ?> value='1'>
+            
+        </td>
+    </tr>
+	<?php
+}
+
+
+
+function wp_custom_admin_interface_enable_maintenance_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>
+    <tr valign="top">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_enable_maintenance">Enable Maintenance Mode</label>
+        </td>
+        <td>
+            
+            <input class="wp_custom_admin_interface_settings_checkbox" type='checkbox' id="wp_custom_admin_interface_enable_maintenance" name='wp_custom_admin_interface_settings[wp_custom_admin_interface_enable_maintenance]' <?php checked( isset($options['wp_custom_admin_interface_enable_maintenance']), 1 ); ?> value='1'>
+            
+        </td>
+    </tr>
+	<?php
+}
+
+
+
+
+
+function wp_custom_admin_interface_maintenance_text_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>
+    <tr valign="top">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_maintenance_text">Custom Maintenance Page/Coming Soon Text</label>
+        </td>
+        <td>
+            
+            <?php 
+            
+            if(isset($options['wp_custom_admin_interface_maintenance_text'])){    
+                wp_editor(html_entity_decode(stripslashes($options['wp_custom_admin_interface_maintenance_text'])), "wp_custom_admin_interface_maintenance_text", $settings = array(
+                'wpautop' => false,
+                'textarea_name' => "wp_custom_admin_interface_settings[wp_custom_admin_interface_maintenance_text]",
+                'drag_drop_upload' => true,
+                'textarea_rows' => 15, 
+                ));    
+            } else {
+                wp_editor("", "wp_custom_admin_interface_maintenance_text", $settings = array(
+                'wpautop' => false,
+                'textarea_name' => "wp_custom_admin_interface_settings[wp_custom_admin_interface_maintenance_text]",
+                'drag_drop_upload' => true,
+                'textarea_rows' => 15,
+                ));         
+            }
+        
+            ?>
+
+        </td>
+    </tr>
+	<?php
+}
+
+
+
+function wp_custom_admin_interface_maintenance_end_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>
+    <tr valign="top">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_maintenance_end">Maintenance Mode End Date</label> <i class="fa fa-info-circle information-icon" aria-hidden="true"></i>
+            <p class="hidden"><em>Please leave blank to have no expiry.</em></p>
+        </td>
+        <td>
+            <input class="wp_custom_admin_interface_settings_input datepicker" type="text" placeholder="YYYY-MM-DD" name="wp_custom_admin_interface_settings[wp_custom_admin_interface_maintenance_end]" id="wp_custom_admin_interface_maintenance_end" class="regular-text" value="<?php if(isset($options['wp_custom_admin_interface_maintenance_end'])) { echo esc_attr($options['wp_custom_admin_interface_maintenance_end']); } ?>">
+        </td>
+    </tr>
+	<?php
+}
+
+
+function wp_custom_admin_interface_tab_memory_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>
+    <tr style="display:none !important;" valign="top">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_tab_memory">Last Tab</label>
+        </td>
+        <td>
+            <input class="wp_custom_admin_interface_settings_input" type="text" name="wp_custom_admin_interface_settings[wp_custom_admin_interface_tab_memory]" id="wp_custom_admin_interface_tab_memory" class="regular-text" value="<?php if(isset($options['wp_custom_admin_interface_tab_memory'])) { echo esc_attr($options['wp_custom_admin_interface_tab_memory']); } ?>">
+        </td>
+    </tr>
+	<?php
+}
+
+
+
+function wp_custom_admin_interface_enable_custom_widget_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>
+    <tr valign="top">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_enable_custom_widget">Enable Custom Dashboard Widget</label>
+        </td>
+        <td>
+            
+            <input class="wp_custom_admin_interface_settings_checkbox" type='checkbox' id="wp_custom_admin_interface_enable_custom_widget" name='wp_custom_admin_interface_settings[wp_custom_admin_interface_enable_custom_widget]' <?php checked( isset($options['wp_custom_admin_interface_enable_custom_widget']), 1 ); ?> value='1'>
+            
+        </td>
+    </tr>
+	<?php
+}
+
+
+
+function wp_custom_admin_interface_custom_widget_title_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>
+    <tr valign="top">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_custom_widget_title">Widget Title</label>
+        </td>
+        <td>
+            
+        <input class="wp_custom_admin_interface_settings_input" type="text" name="wp_custom_admin_interface_settings[wp_custom_admin_interface_custom_widget_title]" id="wp_custom_admin_interface_custom_widget_title" class="regular-text" value="<?php if(isset($options['wp_custom_admin_interface_custom_widget_title'])) { echo esc_attr($options['wp_custom_admin_interface_custom_widget_title']); } ?>">
+            
+            
+        </td>
+    </tr>
+	<?php
+}
+
+
+
+function wp_custom_admin_interface_custom_widget_content_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>
+    <tr valign="top">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_custom_widget_content">Widget Content</label> <i class="fa fa-info-circle information-icon" aria-hidden="true"></i>
+            <p class="hidden"><em>Please feel free to use shortcodes to add dynamic content.</em></p>
+
+        </td>
+        <td>
+            
+            <?php 
+            
+            wp_custom_admin_interface_shortcode_output('widget_text');
+    
+            if(isset($options['wp_custom_admin_interface_custom_widget_content'])){    
+                wp_editor(html_entity_decode(stripslashes($options['wp_custom_admin_interface_custom_widget_content'])), "wp_custom_admin_interface_custom_widget_content", $settings = array(
+                'wpautop' => false,
+                'textarea_name' => "wp_custom_admin_interface_settings[wp_custom_admin_interface_custom_widget_content]",
+                'drag_drop_upload' => true,
+                'textarea_rows' => 7, 
+                ));    
+            } else {
+                wp_editor("", "wp_custom_admin_interface_custom_widget_content", $settings = array(
+                'wpautop' => false,
+                'textarea_name' => "wp_custom_admin_interface_settings[wp_custom_admin_interface_custom_widget_content]",
+                'drag_drop_upload' => true,
+                'textarea_rows' => 7,
+                ));         
+            }
+        
+            ?>
+
+        </td>
+    </tr>
+	<?php
+}
+
+
+
+
+function wp_custom_admin_interface_color_scheme_color_one_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>
+
+    <tr valign="top">
+        <td scope="row" colspan="2">
+            <label>These 5 below colors will make up a new color scheme called 'Custom' that will be available to select on your <a target="_blank" href="profile.php">User Profile</a> page.</label>
+        </td>
+        
+    </tr>
+
+    <tr valign="top">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_color_scheme_color_one">Color Scheme Color 1</label>
+        </td>
+        <td>
+            
+        <input name="wp_custom_admin_interface_settings[wp_custom_admin_interface_color_scheme_color_one]" id="wp_custom_admin_interface_color_scheme_color_one" type="text" value="<?php if(isset($options['wp_custom_admin_interface_color_scheme_color_one'])) { echo esc_attr($options['wp_custom_admin_interface_color_scheme_color_one']); } ?>" class="my-color-field" data-default-color="#222" />    
+      
+        </td>
+    </tr>
+	<?php
+}
+
+function wp_custom_admin_interface_color_scheme_color_two_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>
+    <tr valign="top">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_color_scheme_color_two">Color Scheme Color 2</label>
+        </td>
+        <td>
+            
+        <input name="wp_custom_admin_interface_settings[wp_custom_admin_interface_color_scheme_color_two]" id="wp_custom_admin_interface_color_scheme_color_two" type="text" value="<?php if(isset($options['wp_custom_admin_interface_color_scheme_color_two'])) { echo esc_attr($options['wp_custom_admin_interface_color_scheme_color_two']); } ?>" class="my-color-field" data-default-color="#333" />    
+      
+        </td>
+    </tr>
+	<?php
+}
+
+function wp_custom_admin_interface_color_scheme_color_three_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>
+    <tr valign="top">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_color_scheme_color_three">Color Scheme Color 3</label>
+        </td>
+        <td>
+            
+        <input name="wp_custom_admin_interface_settings[wp_custom_admin_interface_color_scheme_color_three]" id="wp_custom_admin_interface_color_scheme_color_three" type="text" value="<?php if(isset($options['wp_custom_admin_interface_color_scheme_color_three'])) { echo esc_attr($options['wp_custom_admin_interface_color_scheme_color_three']); } ?>" class="my-color-field" data-default-color="#0073aa" />    
+      
+        </td>
+    </tr>
+	<?php
+}
+
+function wp_custom_admin_interface_color_scheme_color_four_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>
+    <tr valign="top">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_color_scheme_color_four">Color Scheme Color 4</label>
+        </td>
+        <td>
+            
+        <input name="wp_custom_admin_interface_settings[wp_custom_admin_interface_color_scheme_color_four]" id="wp_custom_admin_interface_color_scheme_color_four" type="text" value="<?php if(isset($options['wp_custom_admin_interface_color_scheme_color_four'])) { echo esc_attr($options['wp_custom_admin_interface_color_scheme_color_four']); } ?>" class="my-color-field" data-default-color="#00a0d2" />    
+      
+        </td>
+    </tr>
+	<?php
+}
+
+
+
+
+
+function wp_custom_admin_interface_color_scheme_icon_color_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>
+    <tr valign="top">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_color_scheme_icon_color">SVG Icon Color</label>
+        </td>
+        <td>
+            
+            <input name="wp_custom_admin_interface_settings[wp_custom_admin_interface_color_scheme_icon_color]" id="wp_custom_admin_interface_color_scheme_icon_color" type="text" value="<?php if(isset($options['wp_custom_admin_interface_color_scheme_icon_color'])) { echo esc_attr($options['wp_custom_admin_interface_color_scheme_icon_color']); } ?>" class="my-color-field" data-default-color="#f1f2f3" />
+
+        </td>
+    </tr>
+	<?php
+}
+
+
+
+function wp_custom_admin_interface_force_color_scheme_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>
+    <tr valign="top">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_force_color_scheme">Force the custom color scheme on all users</label> <i class="fa fa-info-circle information-icon" aria-hidden="true"></i>
+            <p class="hidden"><em>This will force the 'Custom' color scheme on all users regardless of what color scheme they have chosen in their user profile.</em></p>
+        </td>
+        <td>
+            
+            <input class="wp_custom_admin_interface_settings_checkbox" type='checkbox' id="wp_custom_admin_interface_force_color_scheme" name='wp_custom_admin_interface_settings[wp_custom_admin_interface_force_color_scheme]' <?php checked( isset($options['wp_custom_admin_interface_force_color_scheme']), 1 ); ?> value='1'>
+            
+        </td>
+    </tr>
+	<?php
+}
+
+
+function wp_custom_admin_interface_disable_update_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>
+    <tr valign="top">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_disable_update">Disable Automatic WordPress Updates</label>
+        </td>
+        <td>
+            
+            <input class="wp_custom_admin_interface_settings_checkbox" type='checkbox' id="wp_custom_admin_interface_disable_update" name='wp_custom_admin_interface_settings[wp_custom_admin_interface_disable_update]' <?php checked( isset($options['wp_custom_admin_interface_disable_update']), 1 ); ?> value='1'>
+            
+        </td>
+    </tr>
+	<?php
+}
+
+
+
+
+function wp_custom_admin_interface_top_level_menu_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+    global $submenu, $menu;
+    global $wp_custom_admin_interface_original_top_level_menu, $wp_custom_admin_interface_original_sub_level_menu; 
+    
+    
+    
+
+    
+    /*
+        highlight_string("<?php\n\$data =\n" . var_export($menu, true) . ";\n?>");
+    
+    echo '<br></br><br></br>';
+    
+    
+    highlight_string("<?php\n\$data =\n" . var_export($wp_custom_admin_interface_original_top_level_menu, true) . ";\n?>");
+    
+    
+    */
+    
+	?>
+
+
+
+
+
+    <tr valign="top">
+        <td scope="row" colspan="2">
+            
+            <div id="admin-menu-manager-buttons" style="margin-bottom: 30px;">
+                <button id="add-separator" class="button-secondary" style="cursor:pointer;"><i class="fa fa-plus" aria-hidden="true"></i> Add separator</button>
+                
+                <button id="add-menu-item" class="button-secondary" style="cursor:pointer;"><i class="fa fa-plus" aria-hidden="true"></i> Add menu item</button>
+                
+                <button id="advanced-menu-functionality" data-clipboard-text="<?php echo 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; ?>" class="button-secondary" style="cursor:pointer;"><i class="fa fa-superpowers" aria-hidden="true"></i> Advanced functionality</button>
+                
+                <button id="restore-default-menu" class="button-secondary" style="cursor:pointer;" menudata="<?php echo base64_encode(json_encode($wp_custom_admin_interface_original_top_level_menu)); ?>" submenudata="<?php echo base64_encode(json_encode($wp_custom_admin_interface_original_sub_level_menu)); ?>"><i class="fa fa-window-restore" aria-hidden="true"></i> Restore to default WordPress menu</button>
+                
+                <button id="restore-last-save" class="button-secondary" style="cursor:pointer;" menudata="<?php echo $options['wp_custom_admin_interface_top_level_menu']; ?>" submenudata="<?php echo $options['wp_custom_admin_interface_sub_level_menu']; ?>" removeditems="<?php echo $options['wp_custom_admin_interface_remove_menu_item']; ?>"><i class="fa fa-window-restore" aria-hidden="true"></i> Restore to last save</button>
+                
+                
+                
+                <!--This one below line of code is used to correctly set and maintain the advanced/simpel view funcationlity so it doesn't get tricked from the creation of new menus-->
+                <div class="restricted-advanced-functionality"></div>
+
+                 <?php $admin_role_set = get_role( 'administrator' )->capabilities;  
+                    echo '<span style="display:none;" id="admin-capabilities">';
+                    foreach ($admin_role_set as $key => $value) {
+                        
+                        echo $key.',';
+                    }    
+                    echo '</span>';
+                ?>
+                
+                
+                
+            </div>
+                
+                
+                
+            <div style="display:none;" id="custom-icon-dialog" title="Choose a custom icon">
+                
+                <?php
+                    //declare an array that holds all dashicon classes
+                    $allDashIcons = array('dashicons-menu', 'dashicons-admin-site', 'dashicons-dashboard', 'dashicons-admin-post', 'dashicons-admin-media', 'dashicons-admin-links', 'dashicons-admin-page', 'dashicons-admin-comments', 'dashicons-admin-appearance', 'dashicons-admin-plugins', 'dashicons-admin-users', 'dashicons-admin-tools', 'dashicons-admin-settings', 'dashicons-admin-network', 'dashicons-admin-home', 'dashicons-admin-generic', 'dashicons-admin-collapse', 'dashicons-filter', 'dashicons-admin-customizer', 'dashicons-admin-multisite', 'dashicons-welcome-write-blog', 'dashicons-welcome-add-page', 'dashicons-welcome-view-site', 'dashicons-welcome-widgets-menus', 'dashicons-welcome-comments', 'dashicons-welcome-learn-more', 'dashicons-format-aside', 'dashicons-format-image', 'dashicons-format-gallery', 'dashicons-format-video', 'dashicons-format-status', 'dashicons-format-quote', 'dashicons-format-chat', 'dashicons-format-audio', 'dashicons-camera', 'dashicons-images-alt', 'dashicons-images-alt2', 'dashicons-video-alt', 'dashicons-video-alt2', 'dashicons-video-alt3', 'dashicons-media-archive', 'dashicons-media-audio', 'dashicons-media-code', 'dashicons-media-default', 'dashicons-media-document', 'dashicons-media-interactive', 'dashicons-media-spreadsheet', 'dashicons-media-text', 'dashicons-media-video', 'dashicons-playlist-audio', 'dashicons-playlist-video', 'dashicons-controls-play', 'dashicons-controls-pause', 'dashicons-controls-forward', 'dashicons-controls-skipforward', 'dashicons-controls-back', 'dashicons-controls-skipback', 'dashicons-controls-repeat', 'dashicons-controls-volumeon', 'dashicons-controls-volumeoff', 'dashicons-image-crop', 'dashicons-image-rotate', 'dashicons-image-rotate-left', 'dashicons-image-rotate-right', 'dashicons-image-flip-vertical', 'dashicons-image-flip-horizontal', 'dashicons-image-filter', 'dashicons-undo', 'dashicons-redo', 'dashicons-editor-bold', 'dashicons-editor-italic', 'dashicons-editor-ul', 'dashicons-editor-ol', 'dashicons-editor-quote', 'dashicons-editor-alignleft', 'dashicons-editor-aligncenter', 'dashicons-editor-alignright', 'dashicons-editor-insertmore', 'dashicons-editor-spellcheck', 'dashicons-editor-expand', 'dashicons-editor-contract', 'dashicons-editor-kitchensink', 'dashicons-editor-underline', 'dashicons-editor-justify', 'dashicons-editor-textcolor', 'dashicons-editor-paste-word', 'dashicons-editor-paste-text', 'dashicons-editor-removeformatting', 'dashicons-editor-video', 'dashicons-editor-customchar', 'dashicons-editor-outdent', 'dashicons-editor-indent', 'dashicons-editor-help', 'dashicons-editor-strikethrough', 'dashicons-editor-unlink', 'dashicons-editor-rtl', 'dashicons-editor-break', 'dashicons-editor-code', 'dashicons-editor-paragraph', 'dashicons-editor-table', 'dashicons-align-left', 'dashicons-align-right', 'dashicons-align-center', 'dashicons-align-none', 'dashicons-lock', 'dashicons-unlock', 'dashicons-calendar', 'dashicons-calendar-alt', 'dashicons-visibility', 'dashicons-hidden', 'dashicons-post-status', 'dashicons-edit', 'dashicons-trash', 'dashicons-sticky', 'dashicons-external', 'dashicons-arrow-up', 'dashicons-arrow-down', 'dashicons-arrow-right', 'dashicons-arrow-left', 'dashicons-arrow-up-alt', 'dashicons-arrow-down-alt', 'dashicons-arrow-right-alt', 'dashicons-arrow-left-alt', 'dashicons-arrow-up-alt2', 'dashicons-arrow-down-alt2', 'dashicons-arrow-right-alt2', 'dashicons-arrow-left-alt2', 'dashicons-sort', 'dashicons-leftright', 'dashicons-randomize', 'dashicons-list-view', 'dashicons-exerpt-view', 'dashicons-grid-view', 'dashicons-move', 'dashicons-share', 'dashicons-share-alt', 'dashicons-share-alt2', 'dashicons-twitter', 'dashicons-rss', 'dashicons-email', 'dashicons-email-alt', 'dashicons-facebook', 'dashicons-facebook-alt', 'dashicons-googleplus', 'dashicons-networking', 'dashicons-hammer', 'dashicons-art', 'dashicons-migrate', 'dashicons-performance', 'dashicons-universal-access', 'dashicons-universal-access-alt', 'dashicons-tickets', 'dashicons-nametag', 'dashicons-clipboard', 'dashicons-heart', 'dashicons-megaphone', 'dashicons-schedule', 'dashicons-wordpress', 'dashicons-wordpress-alt', 'dashicons-pressthis', 'dashicons-update', 'dashicons-screenoptions', 'dashicons-info', 'dashicons-cart', 'dashicons-feedback', 'dashicons-cloud', 'dashicons-translation', 'dashicons-tag', 'dashicons-category', 'dashicons-archive', 'dashicons-tagcloud', 'dashicons-text', 'dashicons-yes', 'dashicons-no', 'dashicons-no-alt', 'dashicons-plus', 'dashicons-plus-alt', 'dashicons-minus', 'dashicons-dismiss', 'dashicons-marker', 'dashicons-star-filled', 'dashicons-star-half', 'dashicons-star-empty', 'dashicons-flag', 'dashicons-warning', 'dashicons-location', 'dashicons-location-alt', 'dashicons-vault', 'dashicons-shield', 'dashicons-shield-alt', 'dashicons-sos', 'dashicons-search', 'dashicons-slides', 'dashicons-analytics', 'dashicons-chart-pie', 'dashicons-chart-bar', 'dashicons-chart-line', 'dashicons-chart-area', 'dashicons-groups', 'dashicons-businessman', 'dashicons-id', 'dashicons-id-alt', 'dashicons-products', 'dashicons-awards', 'dashicons-forms', 'dashicons-testimonial', 'dashicons-portfolio', 'dashicons-book', 'dashicons-book-alt', 'dashicons-download', 'dashicons-upload', 'dashicons-backup', 'dashicons-clock', 'dashicons-lightbulb', 'dashicons-microphone', 'dashicons-desktop', 'dashicons-laptop', 'dashicons-tablet', 'dashicons-smartphone', 'dashicons-phone', 'dashicons-index-card', 'dashicons-carrot', 'dashicons-building', 'dashicons-store', 'dashicons-album', 'dashicons-palmtree', 'dashicons-tickets-alt', 'dashicons-money', 'dashicons-smiley', 'dashicons-thumbs-up', 'dashicons-thumbs-down', 'dashicons-layout', 'dashicons-paperclip');
+                    
+                    //for each dash icon print it out
+                    foreach ($allDashIcons as $icons){
+                        echo '<span data="'.$icons.'" class="dashicons icon-for-selection dash-icons-for-selection '.$icons.'"></span>';       
+                    }
+                    
+                    echo '<hr style="border-top: 2px solid #ddd; margin-bottom: 15px;">';
+                    echo '<p>Custom Icons</p>';
+
+                    // print out all custom svg icons
+                    foreach($wp_custom_admin_interface_original_top_level_menu as $item => $value) {
+                        //check if item isn't a separator
+                        $separatorClassCheck = $value[4];
+                        
+                        if(strpos($separatorClassCheck,'wp-menu-separator') !== false){} else {
+                            
+                            $iconTypeCheck = $value[6];
+                            
+                            if(strpos($iconTypeCheck,'data:image/svg+xml') !== false || strpos($iconTypeCheck,'http') !== false ){
+                                
+                                echo '<span class="svg svg-menu-icon icon-for-selection svg-icons-for-selection" data="'.$iconTypeCheck.'" style="background-image: url(&quot;'.$iconTypeCheck.'&quot;);"></span>';    
+                                
+                            }
+                            
+
+                        }
+
+                    }
+    
+                    echo '<hr style="border-top: 2px solid #ddd; margin-bottom: 15px; margin-top: 15px;">';
+                    echo '<input type="button" name="upload-icon-btn" id="upload-icon-btn" class="button-secondary wp_custom_admin_interface_media_upload_button" value="Upload an icon">';
+
+    
+                    
+                ?>
+                
+                
+                
+            </div>
+            
+            <ul id="admin-menu-manager"></ul>
+            
+            
+
+        
+        </td>
+        
+    </tr>
+
+
+
+
+
+
+
+    <tr valign="top" style="display:none;">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_top_level_menu">Top Level Menu</label>
+        </td>
+        <td>
+            
+        <input class="wp_custom_admin_interface_settings_input" type="text" name="wp_custom_admin_interface_settings[wp_custom_admin_interface_top_level_menu]" id="wp_custom_admin_interface_top_level_menu" class="regular-text" value="<?php if(isset($options['wp_custom_admin_interface_top_level_menu'])) { echo esc_attr($options['wp_custom_admin_interface_top_level_menu']); } else {echo base64_encode(json_encode($menu));} ?>">
+            
+            
+        </td>
+    </tr>
+	<?php
+}
+
+
+
+function wp_custom_admin_interface_sub_level_menu_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+    global $submenu, $menu;
+	?>
+    <tr valign="top" style="display:none;">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_sub_level_menu">Sub Level Menu</label>
+        </td>
+        <td>
+            
+        <input class="wp_custom_admin_interface_settings_input" type="text" name="wp_custom_admin_interface_settings[wp_custom_admin_interface_sub_level_menu]" id="wp_custom_admin_interface_sub_level_menu" class="regular-text" value="<?php if(isset($options['wp_custom_admin_interface_sub_level_menu'])) { echo esc_attr($options['wp_custom_admin_interface_sub_level_menu']); } else {echo base64_encode(json_encode($submenu));} ?>">
+            
+            
+        </td>
+    </tr>
+
+
+
+
+	<?php
+}
+
+
+
+
+function wp_custom_admin_interface_remove_menu_item_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>
+    <tr valign="top" style="display:none;">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_remove_menu_item">Menu items to remove</label>
+        </td>
+
+        <td>
+            <input class="wp_custom_admin_interface_settings_input" type="text" name="wp_custom_admin_interface_settings[wp_custom_admin_interface_remove_menu_item]" id="wp_custom_admin_interface_remove_menu_item" class="regular-text" value="<?php if(isset($options['wp_custom_admin_interface_remove_menu_item'])) { echo esc_attr($options['wp_custom_admin_interface_remove_menu_item']); } ?>">
+        </td>
+    </tr>
+	<?php
+}
+
+
+
+
+
+function wp_custom_admin_interface_exception_type_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>           
+
+    <tr valign="top">
+        <td scope="row" colspan="2">
+            <h3 style="margin-top: -5px; margin-bottom:0px;">Use my custom menu for 
+                
+                <?php if(isset($options['wp_custom_admin_interface_exception_type'])) {$wp_custom_admin_interface_exception_type = $options['wp_custom_admin_interface_exception_type'];} else {$wp_custom_admin_interface_exception_type = "No-one";} ?>
+            
+            <select name="wp_custom_admin_interface_settings[wp_custom_admin_interface_exception_type]" id="wp_custom_admin_interface_exception_type">
+                <option value="No-one" <?php if( 'No-one'== $wp_custom_admin_interface_exception_type) echo 'selected="selected"'; ?>>No-one</option>
+                <option value="Everyone" <?php if( 'Everyone'==$wp_custom_admin_interface_exception_type) echo 'selected="selected"'; ?>>Everyone</option>                 
+            </select>
+  
+                except:</h3>
+        </td>
+    </tr>
+
+
+
+	<?php
+}
+
+
+function wp_custom_admin_interface_exception_cases_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>           
+
+    <tr valign="top">
+        <td scope="row" colspan="2">
+            
+            
+            
+            
+            
+            <?php
+            $outputOfUsersAndRolesSelection = '';
+            //lets get the users
+            $users = get_users( array( 'fields' => array( 'ID' ) ) );
+            foreach($users as $user_id){
+                
+                $userID = $user_id->ID;
+                $firstName = get_user_meta($user_id->ID, 'first_name', true);
+                $lastName = get_user_meta($user_id->ID, 'last_name', true);
+                
+                $outputOfUsersAndRolesSelection .= 'User: '.$firstName.' '.$lastName.'('.$userID.'),';
+                
+            }
+            
+            //lets get the roles
+            global $wp_roles;
+            foreach ( $wp_roles->roles as $key=>$value ){
+                $outputOfUsersAndRolesSelection .= 'Role: '.$value['name'].',';    
+            }
+            
+            
+    
+    
+            ?>
+            
+            <div id="combinedListOfUsersAndRoles" data="<?php echo $outputOfUsersAndRolesSelection; ?>"></div>
+            
+            
+            <div id="outputOfUsersAndRolesSelection" data=""></div>
+            
+            
+            <input style="display:none;" class="wp_custom_admin_interface_settings_input" type="text" name="wp_custom_admin_interface_settings[wp_custom_admin_interface_exception_cases]" id="wp_custom_admin_interface_exception_cases" class="regular-text" value="<?php if(isset($options['wp_custom_admin_interface_exception_cases'])) { echo esc_attr($options['wp_custom_admin_interface_exception_cases']); } ?>">
+            
+            
+            </br>
+            <button style="margin-left: 0px !important;" id="pre-submit" class="button button-primary"><i class="fa fa-check-square" aria-hidden="true"></i> Save All Settings</button>
+            
+            
+        </td>
+    </tr>
+
+
+
+	<?php
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+?>

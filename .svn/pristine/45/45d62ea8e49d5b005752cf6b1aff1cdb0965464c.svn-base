@@ -1,0 +1,224 @@
+jQuery(document).ready(function ($) {
+    
+    //instantiates codemirror
+    var cssCode = CodeMirror.fromTextArea(document.getElementById("wp_custom_admin_interface_custom_css_code"), {
+      lineNumbers: true,
+      mode: "css",
+      matchBrackets: true
+    });
+    
+    
+    var javascriptCode = CodeMirror.fromTextArea(document.getElementById("wp_custom_admin_interface_custom_javascript_code"), {
+      lineNumbers: true,
+      mode: "javascript",
+      matchBrackets: true
+    });
+    
+    var phpCode = CodeMirror.fromTextArea(document.getElementById("wp_custom_admin_interface_custom_php_code"), {
+        lineNumbers: true,
+        firstLineNumber: 1,
+        matchBrackets: true,
+        indentUnit: 4,
+        mode: 'text/x-php',
+        styleActiveLine: true
+    });
+    
+    //make help area content into an accordion
+    $("#accordion").accordion({
+        collapsible: true,
+        autoHeight: false,
+        heightStyle: "content",
+        speed: "fast"
+    });
+    
+    
+    //make tabs tabs
+    $("#tabs").tabs();
+    
+    //load previous tab when opening settings page
+    
+    if($('#wp_custom_admin_interface_tab_memory').val().length > 1) {
+    var tab = $('#wp_custom_admin_interface_tab_memory').val();    
+    var index = $(tab).index() - 1;
+    $('#tabs').tabs({
+        active: index
+    });
+    }
+
+    //make links go to particular tabs
+    
+    $('.wrap').on("click", ".open-tab", function () {
+        var tab = $(this).attr('href');
+        var index = $(tab).index() - 1;
+        $('#tabs').tabs({
+            active: index
+        });
+        //add link to hidden link setting as well
+        $('#wp_custom_admin_interface_tab_memory').val(tab);
+    });
+    
+    
+    //add link to hidden link setting when a tab is clicked
+    $('.wrap').on("click", ".nav-tab", function () {
+        var tab = $(this).attr('href');
+        $('#wp_custom_admin_interface_tab_memory').val(tab);
+    });
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+    //hides and then shows on click help tooltips
+    $(".hidden").hide();
+    $(".information-icon").click(function (event) {
+        event.preventDefault();
+        $(this).next(".hidden").slideToggle();
+    });
+    
+    
+    //instantiates the Wordpress colour picker
+    $('.my-color-field').wpColorPicker();
+    
+   
+   
+    
+
+    
+   //makes image upload field 
+   $('.postbox').on("click",".wp_custom_admin_interface_media_upload_button", function(e){
+        e.preventDefault();
+        
+        var previousInput = $(this).prev(); 
+       
+        var image = wp.media({ 
+            title: 'Upload Image',
+            // mutiple: true if you want to upload multiple files at once
+            multiple: false
+        }).open()
+        .on('select', function(e){
+            // This will return the selected image from the Media Uploader, the result is an object
+            var uploaded_image = image.state().get('selection').first();
+            // We convert uploaded_image to a JSON object to make accessing it easier
+            var image_url = uploaded_image.toJSON().url;
+            // Let's assign the url value to the input field
+            
+            previousInput.val(image_url);
+
+        });
+    });
+    
+   
+    //clipboard function
+    new Clipboard('.clipboard');
+    
+    $('.clipboard').click(function(event){
+        event.preventDefault(); 
+        
+        $(this).text("Copied!");
+        
+        setTimeout(function() { $('.clipboard').text("Copy Settings"); }, 2000);
+    });
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //import settings
+    
+    
+    $('#import-settings').click(function (event) {
+    event.preventDefault();   
+        
+    var settings = $('#wp_custom_admin_interface_import_settings').val();
+    var security = $('#wp_custom_admin_interface_import_settings').attr('data'); 
+        
+    console.log(settings);    
+    
+    //do request    
+        var data = {
+            'action': 'import_settings',
+            'settings': settings,
+            'security': security,
+        };
+
+
+            jQuery.post(ajaxurl, data, function (response) {
+            
+                if(response == "success") {
+                    $('<div class="notice notice-info is-dismissible"><p>Settings imported, the page will refresh automatically in 3 seconds.</p></div>').insertAfter('#import-settings');
+                    setTimeout(location.reload.bind(location), 3000);     
+                } else {
+                    $('<div class="notice notice-error is-dismissible"><p>'+response+'</p></div>').insertAfter('#import-settings');
+                    
+                    setTimeout(function(){
+                    $(".postbox .notice-error").fadeOut("slow", function(){
+                        $(this).remove();
+                    })
+                    }, 3000)
+                    
+                    
+                }
+            }    
+        );
+    
+    
+    });
+    
+    
+    
+    //initialise datepicker
+    if($('.datepicker').length){    
+    $('.datepicker').datepicker({  
+    dateFormat:"yy-mm-dd",    
+    });   
+    } 
+    
+    
+
+    //adds shortcode button text to footer tinymce area  
+    $('.wp_custom_admin_interface_append_buttons_footer_text').click(function () {
+        
+        $('#wp_custom_admin_interface_custom_footer_ifr').contents().find("#tinymce p").html( $('#wp_custom_admin_interface_custom_footer_ifr').contents().find("#tinymce p").html() +$(this).attr("value"));
+        
+        $('#wp-wp_custom_admin_interface_custom_footer-editor-container').find("textarea").html( $('#wp-wp_custom_admin_interface_custom_footer-editor-container').find("textarea").html() +$(this).attr("value"));
+        
+    });
+    
+    //adds shortcode button text to widget tinymce area  
+    $('.wp_custom_admin_interface_append_buttons_widget_text').click(function () {
+        
+        $('#wp_custom_admin_interface_custom_widget_content_ifr').contents().find("#tinymce p").html( $('#wp_custom_admin_interface_custom_widget_content_ifr').contents().find("#tinymce p").html() +$(this).attr("value"));
+        
+        $('#wp-wp_custom_admin_interface_custom_widget_content-editor-container').find("textarea").html( $('#wp-wp_custom_admin_interface_custom_widget_content-editor-container').find("textarea").html() +$(this).attr("value"));
+        
+    });
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+});

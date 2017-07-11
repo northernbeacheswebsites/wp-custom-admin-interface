@@ -1,0 +1,636 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly 
+
+//define all the settings in the plugin
+function wp_custom_admin_interface_settings_init(  ) { 
+    
+    //start general
+	register_setting( 'generalPage', 'wp_custom_admin_interface_settings' );
+    
+    add_settings_section(
+		'wp_custom_admin_interface_general','', 
+		'wp_custom_admin_interface_settings_general_callback', 
+		'generalPage'
+	);
+
+	add_settings_field( 
+		'wp_custom_admin_interface_background_color','', 
+		'wp_custom_admin_interface_background_color_render', 
+		'generalPage', 
+		'wp_custom_admin_interface_general' 
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_custom_logo','', 
+		'wp_custom_admin_interface_custom_logo_render', 
+		'generalPage', 
+		'wp_custom_admin_interface_general' 
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_custom_favicon','', 
+		'wp_custom_admin_interface_custom_favicon_render', 
+		'generalPage', 
+		'wp_custom_admin_interface_general' 
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_custom_favicon_frontend','', 
+		'wp_custom_admin_interface_custom_favicon_frontend_render', 
+		'generalPage', 
+		'wp_custom_admin_interface_general' 
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_button_link_color','', 
+		'wp_custom_admin_interface_button_link_color_render', 
+		'generalPage', 
+		'wp_custom_admin_interface_general' 
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_button_link_hover_color','', 
+		'wp_custom_admin_interface_button_link_color_hover_render', 
+		'generalPage', 
+		'wp_custom_admin_interface_general' 
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_custom_footer','', 
+		'wp_custom_admin_interface_custom_footer_render', 
+		'generalPage', 
+		'wp_custom_admin_interface_general' 
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_remove_footer','', 
+		'wp_custom_admin_interface_remove_footer_render', 
+		'generalPage', 
+		'wp_custom_admin_interface_general' 
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_remove_toolbar_frontend','', 
+		'wp_custom_admin_interface_remove_toolbar_frontend_render', 
+		'generalPage', 
+		'wp_custom_admin_interface_general' 
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_tab_memory','', 
+		'wp_custom_admin_interface_tab_memory_render', 
+		'generalPage', 
+		'wp_custom_admin_interface_general' 
+	);
+    
+    
+    //start custom css
+    register_setting( 'customCodePage', 'wp_custom_admin_interface_settings' );
+    
+    add_settings_section(
+		'wp_custom_admin_interface_custom_code','', 
+		'wp_custom_admin_interface_settings_custom_code_callback', 
+		'customCodePage'
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_custom_css_code','', 
+		'wp_custom_admin_interface_custom_css_code_render', 
+		'customCodePage', 
+		'wp_custom_admin_interface_custom_code' 
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_custom_javascript_code','', 
+		'wp_custom_admin_interface_custom_javascript_code_render', 
+		'customCodePage', 
+		'wp_custom_admin_interface_custom_code' 
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_custom_php_code','', 
+		'wp_custom_admin_interface_custom_php_code_render', 
+		'customCodePage', 
+		'wp_custom_admin_interface_custom_code' 
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_deactivate_code','', 
+		'wp_custom_admin_interface_deactivate_code_render', 
+		'customCodePage', 
+		'wp_custom_admin_interface_custom_code' 
+	);
+    
+    
+    
+    //start maintenance
+    
+    register_setting( 'maintenancePage', 'wp_custom_admin_interface_settings' );
+    
+    add_settings_section(
+		'wp_custom_admin_interface_maintenance','', 
+		'wp_custom_admin_interface_maintenance_callback', 
+		'maintenancePage'
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_enable_maintenance','', 
+		'wp_custom_admin_interface_enable_maintenance_render', 
+		'maintenancePage', 
+		'wp_custom_admin_interface_maintenance' 
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_maintenance_text','', 
+		'wp_custom_admin_interface_maintenance_text_render', 
+		'maintenancePage', 
+		'wp_custom_admin_interface_maintenance' 
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_maintenance_end','', 
+		'wp_custom_admin_interface_maintenance_end_render', 
+		'maintenancePage', 
+		'wp_custom_admin_interface_maintenance' 
+	);
+    
+    //start widget page
+    
+    register_setting( 'widgetPage', 'wp_custom_admin_interface_settings' );
+    
+    add_settings_section(
+		'wp_custom_admin_interface_widget','', 
+		'wp_custom_admin_interface_widget_callback', 
+		'widgetPage'
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_enable_custom_widget','', 
+		'wp_custom_admin_interface_enable_custom_widget_render', 
+		'widgetPage', 
+		'wp_custom_admin_interface_widget' 
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_custom_widget_title','', 
+		'wp_custom_admin_interface_custom_widget_title_render', 
+		'widgetPage', 
+		'wp_custom_admin_interface_widget' 
+	);
+    
+    add_settings_field( 
+		'wp_custom_admin_interface_custom_widget_content','', 
+		'wp_custom_admin_interface_custom_widget_content_render', 
+		'widgetPage', 
+		'wp_custom_admin_interface_widget' 
+	);
+    
+    
+
+
+}
+
+
+//the following functions output the option html
+function wp_custom_admin_interface_background_color_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>
+    <tr valign="top">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_background_color">Login Screen Background Color</label>
+        </td>
+        <td>
+            
+            <input name="wp_custom_admin_interface_settings[wp_custom_admin_interface_background_color]" id="wp_custom_admin_interface_background_color" type="text" value="<?php if(isset($options['wp_custom_admin_interface_background_color'])) { echo esc_attr($options['wp_custom_admin_interface_background_color']); } ?>" class="my-color-field" data-default-color="#f1f1f1" />
+
+        </td>
+    </tr>
+	<?php
+}
+
+
+
+
+function wp_custom_admin_interface_custom_logo_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>
+    <tr valign="top">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_custom_logo">Custom Login Logo</label>
+        </td>
+        <td>
+            
+        <input class="wp_custom_admin_interface_settings_input" type="text" name="wp_custom_admin_interface_settings[wp_custom_admin_interface_custom_logo]" id="wp_custom_admin_interface_custom_logo" class="regular-text" value="<?php if(isset($options['wp_custom_admin_interface_custom_logo'])) { echo esc_attr($options['wp_custom_admin_interface_custom_logo']); } ?>">
+            
+            
+        <input type="button" name="upload-btn" id="upload-btn" class="button-secondary wp_custom_admin_interface_media_upload_button" value="Upload Image">
+
+        </td>
+    </tr>
+	<?php
+}
+
+
+function wp_custom_admin_interface_custom_favicon_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>
+    <tr valign="top">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_custom_favicon">Custom Favicon</label> <i class="fa fa-info-circle information-icon" aria-hidden="true"></i>
+            <p class="hidden"><em>For best results please upload an image with a square aspect ratio</em></p>
+        </td>
+        <td>
+            
+        <input class="wp_custom_admin_interface_settings_input" type="text" name="wp_custom_admin_interface_settings[wp_custom_admin_interface_custom_favicon]" id="wp_custom_admin_interface_custom_favicon" class="regular-text" value="<?php if(isset($options['wp_custom_admin_interface_custom_favicon'])) { echo esc_attr($options['wp_custom_admin_interface_custom_favicon']); } ?>">
+            
+            
+        <input type="button" name="upload-btn" id="upload-btn" class="button-secondary wp_custom_admin_interface_media_upload_button" value="Upload Image">
+
+        </td>
+    </tr>
+	<?php
+}
+
+
+function wp_custom_admin_interface_custom_favicon_frontend_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>
+    <tr valign="top">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_custom_favicon_frontend">Also add the above favicon to the frontend</label>
+        </td>
+        <td>
+            
+            <input class="wp_custom_admin_interface_settings_checkbox" type='checkbox' id="wp_custom_admin_interface_custom_favicon_frontend" name='wp_custom_admin_interface_settings[wp_custom_admin_interface_custom_favicon_frontend]' <?php checked( isset($options['wp_custom_admin_interface_custom_favicon_frontend']), 1 ); ?> value='1'>
+            
+        </td>
+    </tr>
+	<?php
+}
+
+
+
+function wp_custom_admin_interface_button_link_color_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>
+    <tr valign="top">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_button_link_color">Admin Link &amp; Button Color</label> <i class="fa fa-info-circle information-icon" aria-hidden="true"></i>
+            <p class="hidden"><em>Please click the 'Default' button when changing the colour to load the default WordPress styling</em></p>
+        </td>
+        <td>
+            
+            <input name="wp_custom_admin_interface_settings[wp_custom_admin_interface_button_link_color]" id="wp_custom_admin_interface_button_link_color" type="text" value="<?php if(isset($options['wp_custom_admin_interface_button_link_color'])) { echo esc_attr($options['wp_custom_admin_interface_button_link_color']); } ?>" class="my-color-field" data-default-color="#0085ba" />
+
+        </td>
+    </tr>
+	<?php
+}
+
+
+function wp_custom_admin_interface_button_link_color_hover_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>
+    <tr valign="top">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_button_link_hover_color">Admin Link &amp; Button Hover Color</label> <i class="fa fa-info-circle information-icon" aria-hidden="true"></i>
+            <p class="hidden"><em>Please click the 'Default' button when changing the colour to load the default WordPress styling</em></p>
+        </td>
+        <td>
+            
+            <input name="wp_custom_admin_interface_settings[wp_custom_admin_interface_button_link_hover_color]" id="wp_custom_admin_interface_button_link_hover_color" type="text" value="<?php if(isset($options['wp_custom_admin_interface_button_link_hover_color'])) { echo esc_attr($options['wp_custom_admin_interface_button_link_hover_color']); } ?>" class="my-color-field" data-default-color="#008ec2" />
+
+        </td>
+    </tr>
+	<?php
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+function wp_custom_admin_interface_custom_footer_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>
+    <tr valign="top">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_custom_footer">Custom Footer Text</label> <i class="fa fa-info-circle information-icon" aria-hidden="true"></i>
+            <p class="hidden"><em>Please feel free to use shortcodes to add dynamic content.</em></p>
+
+            
+        </td>
+        <td>
+            
+            <?php 
+            
+            wp_custom_admin_interface_shortcode_output('footer_text');
+    
+            if(isset($options['wp_custom_admin_interface_custom_footer'])){    
+                wp_editor(html_entity_decode(stripslashes($options['wp_custom_admin_interface_custom_footer'])), "wp_custom_admin_interface_custom_footer", $settings = array(
+                'wpautop' => false,    
+                'textarea_name' => "wp_custom_admin_interface_settings[wp_custom_admin_interface_custom_footer]",
+                'drag_drop_upload' => true,
+                'textarea_rows' => 7, 
+                ));    
+            } else {
+                wp_editor("", "wp_custom_admin_interface_custom_footer", $settings = array(
+                'wpautop' => false,    
+                'textarea_name' => "wp_custom_admin_interface_settings[wp_custom_admin_interface_custom_footer]",
+                'drag_drop_upload' => true,
+                'textarea_rows' => 7,
+                ));         
+            }
+        
+            ?>
+
+        </td>
+    </tr>
+	<?php
+}
+
+
+
+function wp_custom_admin_interface_remove_toolbar_frontend_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>
+    <tr valign="top">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_remove_toolbar_frontend">Remove admin toolbar from the front end for all users</label>
+        </td>
+        <td>
+            
+            <input class="wp_custom_admin_interface_settings_checkbox" type='checkbox' id="wp_custom_admin_interface_remove_toolbar_frontend" name='wp_custom_admin_interface_settings[wp_custom_admin_interface_remove_toolbar_frontend]' <?php checked( isset($options['wp_custom_admin_interface_remove_toolbar_frontend']), 1 ); ?> value='1'>
+            
+        </td>
+    </tr>
+	<?php
+}
+
+
+
+function wp_custom_admin_interface_custom_css_code_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>
+    <tr valign="top">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_custom_css_code">Add custom CSS to the WordPress admin</label>
+        </td>
+        <td>
+            
+            
+            <textarea style="display:none;" cols="70" rows="30" name="wp_custom_admin_interface_settings[wp_custom_admin_interface_custom_css_code]" id="wp_custom_admin_interface_custom_css_code"><?php if(isset($options['wp_custom_admin_interface_custom_css_code'])) { echo esc_attr($options['wp_custom_admin_interface_custom_css_code']); } ?></textarea>
+            
+            
+        </td>
+    </tr>
+	<?php
+}
+
+
+function wp_custom_admin_interface_custom_javascript_code_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>
+    <tr valign="top">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_custom_javascript_code">Add custom Javascript/jQuery to the WordPress admin</label> <i class="fa fa-info-circle information-icon" aria-hidden="true"></i>
+            <p class="hidden"><em>There's no need to put in the script tags and jQuery can be used like: <code><strong>$('body').show();</strong></code> </em></p>
+        </td>
+        <td>
+            
+            
+            <textarea style="display:none;" cols="70" rows="30" name="wp_custom_admin_interface_settings[wp_custom_admin_interface_custom_javascript_code]" id="wp_custom_admin_interface_custom_javascript_code"><?php if(isset($options['wp_custom_admin_interface_custom_javascript_code'])) { echo esc_attr($options['wp_custom_admin_interface_custom_javascript_code']); } ?></textarea>
+            
+            
+        </td>
+    </tr>
+	<?php
+}
+
+
+function wp_custom_admin_interface_custom_php_code_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>
+    <tr valign="top">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_custom_php_code">Add custom PHP to WordPress</label> <i class="fa fa-info-circle information-icon" aria-hidden="true"></i>
+            <p class="hidden"><em>There's no need to put in the starting or closing PHP tags</em></p>
+        </td>
+        <td>
+            <textarea style="display:none;" cols="70" rows="30" name="wp_custom_admin_interface_settings[wp_custom_admin_interface_custom_php_code]" id="wp_custom_admin_interface_custom_php_code"><?php if(isset($options['wp_custom_admin_interface_custom_php_code'])) { echo esc_attr($options['wp_custom_admin_interface_custom_php_code']); } ?></textarea>
+        </td>
+    </tr>
+	<?php
+}
+
+
+function wp_custom_admin_interface_remove_footer_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>
+    <tr valign="top">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_remove_footer">Remove WordPress Version Number from Footer</label>
+        </td>
+        <td>
+            
+            <input class="wp_custom_admin_interface_settings_checkbox" type='checkbox' id="wp_custom_admin_interface_remove_footer" name='wp_custom_admin_interface_settings[wp_custom_admin_interface_remove_footer]' <?php checked( isset($options['wp_custom_admin_interface_remove_footer']), 1 ); ?> value='1'>
+            
+        </td>
+    </tr>
+	<?php
+}
+
+
+
+function wp_custom_admin_interface_deactivate_code_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>
+    <tr valign="top">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_deactivate_code">Deactivate Custom Code on this Settings Tab</label>
+        </td>
+        <td>
+            
+            <input class="wp_custom_admin_interface_settings_checkbox" type='checkbox' id="wp_custom_admin_interface_deactivate_code" name='wp_custom_admin_interface_settings[wp_custom_admin_interface_deactivate_code]' <?php checked( isset($options['wp_custom_admin_interface_deactivate_code']), 1 ); ?> value='1'>
+            
+        </td>
+    </tr>
+	<?php
+}
+
+
+
+function wp_custom_admin_interface_enable_maintenance_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>
+    <tr valign="top">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_enable_maintenance">Enable Maintenance Mode</label>
+        </td>
+        <td>
+            
+            <input class="wp_custom_admin_interface_settings_checkbox" type='checkbox' id="wp_custom_admin_interface_enable_maintenance" name='wp_custom_admin_interface_settings[wp_custom_admin_interface_enable_maintenance]' <?php checked( isset($options['wp_custom_admin_interface_enable_maintenance']), 1 ); ?> value='1'>
+            
+        </td>
+    </tr>
+	<?php
+}
+
+
+
+
+
+function wp_custom_admin_interface_maintenance_text_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>
+    <tr valign="top">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_maintenance_text">Custom Maintenance Page/Coming Soon Text</label>
+        </td>
+        <td>
+            
+            <?php 
+            
+            if(isset($options['wp_custom_admin_interface_maintenance_text'])){    
+                wp_editor(html_entity_decode(stripslashes($options['wp_custom_admin_interface_maintenance_text'])), "wp_custom_admin_interface_maintenance_text", $settings = array(
+                'wpautop' => false,
+                'textarea_name' => "wp_custom_admin_interface_settings[wp_custom_admin_interface_maintenance_text]",
+                'drag_drop_upload' => true,
+                'textarea_rows' => 15, 
+                ));    
+            } else {
+                wp_editor("", "wp_custom_admin_interface_maintenance_text", $settings = array(
+                'wpautop' => false,
+                'textarea_name' => "wp_custom_admin_interface_settings[wp_custom_admin_interface_maintenance_text]",
+                'drag_drop_upload' => true,
+                'textarea_rows' => 15,
+                ));         
+            }
+        
+            ?>
+
+        </td>
+    </tr>
+	<?php
+}
+
+
+
+function wp_custom_admin_interface_maintenance_end_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>
+    <tr valign="top">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_maintenance_end">Maintenance Mode End Date</label> <i class="fa fa-info-circle information-icon" aria-hidden="true"></i>
+            <p class="hidden"><em>Please leave blank to have no expiry.</em></p>
+        </td>
+        <td>
+            <input class="wp_custom_admin_interface_settings_input datepicker" type="text" placeholder="YYYY-MM-DD" name="wp_custom_admin_interface_settings[wp_custom_admin_interface_maintenance_end]" id="wp_custom_admin_interface_maintenance_end" class="regular-text" value="<?php if(isset($options['wp_custom_admin_interface_maintenance_end'])) { echo esc_attr($options['wp_custom_admin_interface_maintenance_end']); } ?>">
+        </td>
+    </tr>
+	<?php
+}
+
+
+function wp_custom_admin_interface_tab_memory_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>
+    <tr style="display:none !important;" valign="top">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_tab_memory">Last Tab</label>
+        </td>
+        <td>
+            <input class="wp_custom_admin_interface_settings_input" type="text" name="wp_custom_admin_interface_settings[wp_custom_admin_interface_tab_memory]" id="wp_custom_admin_interface_tab_memory" class="regular-text" value="<?php if(isset($options['wp_custom_admin_interface_tab_memory'])) { echo esc_attr($options['wp_custom_admin_interface_tab_memory']); } ?>">
+        </td>
+    </tr>
+	<?php
+}
+
+
+
+function wp_custom_admin_interface_enable_custom_widget_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>
+    <tr valign="top">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_enable_custom_widget">Enable Custom Dashboard Widget</label>
+        </td>
+        <td>
+            
+            <input class="wp_custom_admin_interface_settings_checkbox" type='checkbox' id="wp_custom_admin_interface_enable_custom_widget" name='wp_custom_admin_interface_settings[wp_custom_admin_interface_enable_custom_widget]' <?php checked( isset($options['wp_custom_admin_interface_enable_custom_widget']), 1 ); ?> value='1'>
+            
+        </td>
+    </tr>
+	<?php
+}
+
+
+
+function wp_custom_admin_interface_custom_widget_title_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>
+    <tr valign="top">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_custom_widget_title">Widget Title</label>
+        </td>
+        <td>
+            
+        <input class="wp_custom_admin_interface_settings_input" type="text" name="wp_custom_admin_interface_settings[wp_custom_admin_interface_custom_widget_title]" id="wp_custom_admin_interface_custom_widget_title" class="regular-text" value="<?php if(isset($options['wp_custom_admin_interface_custom_widget_title'])) { echo esc_attr($options['wp_custom_admin_interface_custom_widget_title']); } ?>">
+            
+            
+        </td>
+    </tr>
+	<?php
+}
+
+
+
+function wp_custom_admin_interface_custom_widget_content_render() { 
+	$options = get_option( 'wp_custom_admin_interface_settings' );
+	?>
+    <tr valign="top">
+        <td scope="row">
+            <label for="wp_custom_admin_interface_custom_widget_content">Widget Content</label> <i class="fa fa-info-circle information-icon" aria-hidden="true"></i>
+            <p class="hidden"><em>Please feel free to use shortcodes to add dynamic content.</em></p>
+
+        </td>
+        <td>
+            
+            <?php 
+            
+            wp_custom_admin_interface_shortcode_output('widget_text');
+    
+            if(isset($options['wp_custom_admin_interface_custom_widget_content'])){    
+                wp_editor(html_entity_decode(stripslashes($options['wp_custom_admin_interface_custom_widget_content'])), "wp_custom_admin_interface_custom_widget_content", $settings = array(
+                'wpautop' => false,
+                'textarea_name' => "wp_custom_admin_interface_settings[wp_custom_admin_interface_custom_widget_content]",
+                'drag_drop_upload' => true,
+                'textarea_rows' => 7, 
+                ));    
+            } else {
+                wp_editor("", "wp_custom_admin_interface_custom_widget_content", $settings = array(
+                'wpautop' => false,
+                'textarea_name' => "wp_custom_admin_interface_settings[wp_custom_admin_interface_custom_widget_content]",
+                'drag_drop_upload' => true,
+                'textarea_rows' => 7,
+                ));         
+            }
+        
+            ?>
+
+        </td>
+    </tr>
+	<?php
+}
+
+
+
+
+?>
